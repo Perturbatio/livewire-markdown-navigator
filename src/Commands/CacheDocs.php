@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Perturbatio\LivewireMarkdownNavigator\Actions\CacheRenderedFileAction;
 use Perturbatio\LivewireMarkdownNavigator\CommonMark\Extension\DocLink\DocLinkExtension;
-use Spatie\LaravelMarkdown\MarkdownRenderer;
 
 /**
  * @phpstan-import-type DocLinkContext from DocLinkExtension
