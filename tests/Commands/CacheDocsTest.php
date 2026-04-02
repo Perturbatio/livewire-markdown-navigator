@@ -32,7 +32,7 @@ it('fails when a disk that is not permitted has been requested', function () {
 
 it('fails when a disk name is not a string', function () {
     config()->set('livewire-markdown-navigator.permitted_disks', [
-        234
+        234,
     ]);
     $this->artisan('livewire-markdown-navigator:cache-docs')
         ->expectsOutputToContain('Invalid disk name in configuration')
@@ -42,16 +42,16 @@ it('fails when a disk name is not a string', function () {
 it('caches the rendering of each file in the permitted disks', function () {
     config()->set('livewire-markdown-navigator.permitted_disks', [
         'docs',
-        'other'
+        'other',
     ]);
-    $file1Content = <<<MARKDOWN
+    $file1Content = <<<'MARKDOWN'
 # Test Cache
 MARKDOWN;
-;
-    $file2Content = <<<MARKDOWN
+
+    $file2Content = <<<'MARKDOWN'
 # Test Cache 2
 MARKDOWN;
-;
+
     $docsDisk = Storage::fake('docs');
     $dir1 = 'test-dir';
     $docsDisk->makeDirectory($dir1);
@@ -81,7 +81,7 @@ it('re-caches the rendering if the force flag is provided', function () {
     $dir1 = 'test-dir';
     $fileName = 'test-force.md';
     $originalContent = 'TEST BEFORE RECACHE';
-    $newContent = <<<MARKDOWN
+    $newContent = <<<'MARKDOWN'
 # Test Cache
 MARKDOWN;
     $expected = '<h1 id="test-cache">Test Cache</h1>';
@@ -95,6 +95,5 @@ MARKDOWN;
     $this->artisan('livewire-markdown-navigator:cache-docs --force')->assertOk();
 
     expect(Cache::has($key))->toBeTrue()
-        ->and(Cache::get($key))->toContain($expected)
-    ;
+        ->and(Cache::get($key))->toContain($expected);
 });
