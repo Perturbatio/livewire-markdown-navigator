@@ -5,15 +5,18 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/perturbatio/livewire-markdown-navigator/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/perturbatio/livewire-markdown-navigator/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/perturbatio/livewire-markdown-navigator.svg?style=flat-square)](https://packagist.org/packages/perturbatio/livewire-markdown-navigator)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A livewire component that allows you to view markdown documentation stored in a given disk and path.
 
-## Support us
+## Support Spatie's open source work
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/livewire-markdown-navigator.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/livewire-markdown-navigator)
+This package was NOT created by Spatie, but it was created using Spatie's [spatie/laravel-package-tools](https://github.com/spatie/laravel-package-tools),
+without them, this package probably would have been possible, but I'm not sure I could have been as motivated to make it.
+But I have used several of their other excellent packages.
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+They invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support them by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+They highly appreciate you sending them a postcard from your hometown, mentioning which of their package(s) you are using (and maybe this one too). 
+You'll find their address on [their contact page](https://spatie.be/about-us). They publish all received postcards on [their virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -76,7 +79,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Kris Kelly](https://github.com/Perturbatio)
+- _[Kris Kelly_](https://github.com/Perturbatio)
 - [All Contributors](../../contributors)
 
 ## License
