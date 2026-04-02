@@ -33,9 +33,15 @@ class RenderFileAction
             throw new Exception("File [$file] does not exist on disk [$diskName].");
         }
 
+        $content = Storage::disk($diskName)->get($file);
+
+        if ($content === null) {
+            return '';
+        }
+
         return app(MarkdownRenderer::class)
             ->addExtension(app(DocLinkExtension::class))
             ->commonmarkOptions($commonMarkOptions)
-            ->toHtml(Storage::disk($diskName)->get($file) ?? '');
+            ->toHtml($content);
     }
 }

@@ -32,6 +32,7 @@ class TestCase extends Orchestra
     {
         tap($app['config'], function ($config) {
             $config->set('cache.default', 'array');
+            $config->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
         });
     }
 

@@ -32,7 +32,10 @@ class CacheDocs extends Command
      */
     public function handle(): int
     {
-        $cacheDuration = (int) $this->option('cacheDuration');
+        $cacheDuration = intval($this->option('cacheDuration'));
+        if (! is_int($cacheDuration) || $cacheDuration <= 0) {
+            $this->fail('Cache duration must be a positive integer.');
+        }
         $permittedDisks = config('livewire-markdown-navigator.permitted_disks', []);
 
         if (empty($permittedDisks) || ! is_array($permittedDisks)) {
