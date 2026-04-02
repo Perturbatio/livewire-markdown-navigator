@@ -34,8 +34,6 @@ jobs:
         include:
           - laravel: 13.*
             testbench: 11.*
-          - laravel: 12.*
-            testbench: 10.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -65,3 +63,28 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest --ci
+
+  mutation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    name: Mutation Testing
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: pcov
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:13.*" "orchestra/testbench:11.*" --no-interaction --no-update
+          composer update --prefer-stable --prefer-dist --no-interaction
+
+      - name: Execute mutation tests
+        run: vendor/bin/pest --mutate --parallel --min=100 --ci
+
