@@ -1,32 +1,43 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Perturbatio\LivewireMarkdownNavigator\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Livewire\Livewire;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Perturbatio\LivewireMarkdownNavigator\LivewireMarkdownNavigatorServiceProvider;
 
 class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
         parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->registerLivewireComponents();
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            SkeletonServiceProvider::class,
+            LivewireServiceProvider::class,
+            LivewireMarkdownNavigatorServiceProvider::class,
         ];
+    }
+
+    protected function registerLivewireComponents(): void
+    {
+        Livewire::component('markdown-navigator');
+    }
+
+    protected function defineEnvironment($app)
+    {
+        tap($app['config'], function ($config) {
+            $config->set('cache.default', 'array');
+        });
     }
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        //        config()->set('database.default', 'testing');
 
         /*
          foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/../database/migrations') as $migration) {

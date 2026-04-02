@@ -1,30 +1,34 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "perturbatio/livewire-markdown-navigator",
+    "description": "Render a directory of markdown files in a livewire component",
     "keywords": [
-        ":vendor_name",
+        "perturbatio",
         "laravel",
-        ":package_slug"
+        "livewire-markdown-navigator"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/perturbatio/livewire-markdown-navigator",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Kris Kelly",
+            "email": "me@perturbatio.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.4",
         "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^11.0||^12.0"
+        "illuminate/contracts": "^13.0",
+        "illuminate/support": "^13.0",
+        "livewire/livewire": "^v4.2.2",
+        "spatie/laravel-markdown": "^2.8",
+        "spatie/shiki-php": "^2.3"
     },
     "require-dev": {
-        "laravel/pint": "^1.14",
+        "laravel/pint": "^v1.29.0",
         "nunomaduro/collision": "^8.8",
-        "larastan/larastan": "^3.0",
-        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "larastan/larastan": "^v3.9.3",
+        "orchestra/testbench": "^v11.0.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-arch": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
@@ -35,13 +39,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Perturbatio\\LivewireMarkdownNavigator\\": "src/",
+            "Perturbatio\\LivewireMarkdownNavigator\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Perturbatio\\LivewireMarkdownNavigator\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,11 +67,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
-            }
+                "Perturbatio\\LivewireMarkdownNavigator\\LivewireMarkdownNavigatorServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
