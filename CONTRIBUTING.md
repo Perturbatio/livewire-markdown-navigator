@@ -1,0 +1,20 @@
+# Contributing
+
+PRs are welcome, but please open an issue first to discuss what you would like to change.
+
+## General Guidelines:
+
+* No abuse, no harassment
+* No words that would get you in trouble in a job interview
+
+## Coding Guidelines:
+
+* All new code must be covered by tests, and all existing tests must pass.
+* Mutation testing must be run and all mutants must be killed.
+* 100% coverage is required
+* PHPStan level 9 is the current requirement
+* PRs should be focused and limited to a single change or feature. If you have multiple unrelated changes, please open separate PRs for each.
+* Code changes must be documented
+* No AI slop - Your GenAI coding agent is just a glorified autocomplete tool and must be treated as such. Any code must be reviewed and edited by a human **before** being submitted.
+* Code must be yours and/or permitted under the [MIT licence](LICENSE.md) and credited appropriately
+* No PRs from AI coding agents - these will be ignored and closed.
