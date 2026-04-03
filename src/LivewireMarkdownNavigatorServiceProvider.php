@@ -2,6 +2,7 @@
 
 namespace Perturbatio\LivewireMarkdownNavigator;
 
+use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 use Perturbatio\LivewireMarkdownNavigator\Commands\CacheDocs;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -14,10 +15,16 @@ class LivewireMarkdownNavigatorServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
+        Blade::componentNamespace(
+            namespace: 'Perturbatio\\LivewireMarkdownNavigator\\View\\Components',
+            prefix: 'livewire-markdown-navigator',
+        );
+
         Livewire::addNamespace(
             namespace: 'perturbatio',
             viewPath: __DIR__.'/../resources/views/livewire',
         );
+
     }
 
     public function configurePackage(Package $package): void

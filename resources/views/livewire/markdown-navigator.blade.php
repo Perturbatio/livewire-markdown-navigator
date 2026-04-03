@@ -120,7 +120,6 @@ new class extends Component {
 ?>
 
 <div class="markdown-navigator" x-cloak>
-    {{$markdownNavSelected}}
     <div wire:model.live.debounce="files" class="">
         @php
             $lastDirectory = null;
@@ -128,47 +127,12 @@ new class extends Component {
         @endphp
         <div class="mn-container">
             <div class="mn-container--inner">
-                <ul class="file-list">
-                    @foreach($this->files as $file)
-                        {{-- recursively render the files in a tree-like structure, separating by directory--}}
-                        @php
-                            $relativePath = str_replace($docPath . '/', '', $file);
-                            $parts = explode('/', $relativePath);
-                            $fileName = \Str::of(array_pop($parts))->before('.md')->replace('-', ' ')->title();
-                            $indent = count($parts) * 1.25; // Indent based on directory depth
-                            // get the second last part of the path as the directory name, if it exists
-                            $directory = count($parts) > 0 ? $parts[count($parts) - 1] : null;
-                            if ($directory && $directory !== $lastDirectory) {
-                        @endphp
-                        <li class="directory">
-                            <div class="directory-inner"
-                                 style="padding-left: calc({{count($parts)}} * 0.5rem);">{{\Str::of($directory)->replace('-', ' ')->title()}}</div>
-                        </li>
-                        @php
-                            }
-                            $lastDirectory = $directory;
-                        @endphp
-                        <li class="file {{ $file === $markdownNavSelected ? 'selected-file' : '' }}">
-                            @if($file !== $markdownNavSelected)
-                                @php
-                                    $currentQuery = request()->query();
-                                    $currentQuery['markdownNavSelected'] = $file;
-                                    $queryString = http_build_query($currentQuery);
-                                @endphp
-                                <a href="#" wire:click.prevent="viewDoc('{{$file}}')" title="{{$file}}"
-                                   class="file-link">
-                                    <span class="inline-block"
-                                          style="padding-left: calc({{ $indent }}rem);">{{$fileName}}</span>
-                                </a>
-                            @else
-                                <div class="selected-file">
-                                    <span class="inline-block"
-                                          style="padding-left: calc({{ $indent }}rem);">{{$fileName}}</span>
-                                </div>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
+                <x-livewire-markdown-navigator::file-nav
+                    :markdownNavigator="$this"
+                    :docPath="$docPath"
+                    :markdownNavSelected="$markdownNavSelected"
+                    class="file-nav"
+                />
             </div>
             <div class="markdown-content">
                 <div wire:loading.remove>{{ collect($slugParts)->join(' / ') }}</div>
@@ -182,22 +146,3 @@ new class extends Component {
         </div>
     </div>
 </div>
-
-<script>
-    // function loadFromHash() {
-    //     const file = window.location.hash.replace('#', '');
-    //     if (file) {
-    //         $wire.viewDoc(file);
-    //     }
-    // }
-
-    // if the URL has a fragment on page load, load that file
-    // loadFromHash();
-
-    // window.addEventListener('hashchange', loadFromHash)
-
-    // $wire.on('markdown-navigator:file-selected', params => {
-    //     // push the param to the current URL as a fragment
-    //     window.location.hash = params[0].file;
-    // });
-</script>

@@ -35,39 +35,6 @@
         @apply overflow-auto py-2 px-4 my-4 mx-0;
     }
 
-    .file-list {
-        @apply p-4 overflow-y-auto fixed bg-gray-200 dark:bg-gray-900 lg:relative;
-        .file {
-            @apply py-1;
-            &.selected-file {
-                @apply relative;
-                &::before {
-                    content: ' ';
-                    @apply bg-primary-400 absolute left-[-0.5rem] top-0 bottom-0 w-[4px];
-                }
-            }
-            &.selected-file {
-                 span {
-                    @apply block text-left cursor-pointer py-1 px-1 ml-1 w-full font-bold;
-                }
-            }
-            .file-link {
-                @apply block text-left cursor-pointer py-1 px-1 w-full;
-                &:hover,
-                &:focus {
-                    @apply bg-gray-600 dark:bg-gray-800 text-primary-500 dark:text-primary-400;
-                }
-            }
-        }
-        .directory {
-            @apply italic font-bold relative py-4 mb-4;
-            &:after {
-                @apply border-b-2 border-gray-600 dark:border-gray-200 h-2 m-auto absolute left-0 bottom-0 right-0;
-                content: ' ';
-            }
-        }
-    }
-
     p {
         @apply mb-4;
         code {
@@ -127,4 +94,39 @@
             }
         }
     }
+
+    /** File nav component*/
+    .file-nav {
+        @apply p-4 overflow-y-auto fixed bg-gray-200 dark:bg-gray-900 lg:relative;
+        .file {
+            @apply py-1;
+            &.selected-file {
+                @apply relative;
+                &::before {
+                    content: ' ';
+                    @apply bg-primary-400 absolute left-[-0.5rem] top-0 bottom-0 w-[4px];
+                }
+            }
+            &.selected-file {
+                span {
+                    @apply inline-block block text-left cursor-pointer py-1 px-1 ml-1 w-full font-bold;
+                }
+            }
+            .file-link {
+                @apply block text-left cursor-pointer py-1 px-2 w-full rounded;
+                &:hover,
+                &:focus {
+                    @apply bg-gray-300 dark:bg-gray-800 text-primary-900 dark:text-primary-400;
+                }
+            }
+        }
+        .directory {
+            @apply italic font-bold relative py-4 mb-4;
+            &:after {
+                @apply border-b-2 border-gray-600 dark:border-gray-200 h-2 m-auto absolute left-0 bottom-0 right-0;
+                content: ' ';
+            }
+        }
+    }
+
 }
