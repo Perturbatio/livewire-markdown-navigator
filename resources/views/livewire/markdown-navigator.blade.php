@@ -102,8 +102,8 @@ new class extends Component {
             $this->content = CacheRenderedFileAction::execute($file, $this->diskName, $this->cacheDuration,
                 $this->getCommonMarkOptions());
         } else {
-            $this->content = RenderFileAction::execute($file, $diskName,
-                $commonMarkOptions);
+            $this->content = RenderFileAction::execute($file, $this->diskName,
+                $this->getCommonMarkOptions());
         }
 
         $this->dispatch('markdown-navigator:file-selected', ['file' => $file]);
@@ -146,3 +146,22 @@ new class extends Component {
         </div>
     </div>
 </div>
+
+<script>
+    function loadFromUrlQuery() {
+        // const file = window.location.hash.replace('#', '');
+        let search = window.location.search;
+        if (!search) {
+            return;
+        }
+
+        const params = new URLSearchParams(search);
+        const file = params.get('markdownNavSelected');
+        if (file) {
+            $wire.viewDoc(file);
+        }
+    }
+
+    // if the URL has a query on page load, load that file
+    loadFromUrlQuery();
+</script>

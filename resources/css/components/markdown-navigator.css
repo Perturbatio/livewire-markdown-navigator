@@ -44,11 +44,13 @@
         }
         a {
             @apply relative text-primary-700 dark:text-primary-400 text-base;
+            /** external link */
             &[href^="http://"]::after {
                 @apply right-[-1rem] absolute;
                 content: '\2197';
             }
-            &[href^="#"]::after {
+            /** internal link */
+            &[rel="internal"]::after {
                 @apply right-[-1rem] absolute;
                 content: '\2398';
             }
