@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+@import './components/markdown-navigator.css';
+@source '../views/*.blade.php';
+@source '../**/*.js';
+@source 'components/markdown-navigator.css';
+
+@theme {
+    --color-primary-50:  oklch(98.5% 0.158 74.47);
+    --color-primary-100: oklch(91.5% 0.158 74.47);
+    --color-primary-200: oklch(84.5% 0.158 74.47);
+    --color-primary-300: oklch(77.5% 0.158 74.47);
+    --color-primary-400: oklch(69.5% 0.158 74.47);
+    --color-primary-500: oklch(62.5% 0.158 74.47);
+    --color-primary-600: oklch(55.5% 0.158 74.47);
+    --color-primary-700: oklch(47.5% 0.158 74.47);
+    --color-primary-800: oklch(40.5% 0.158 74.47);
+    --color-primary-900: oklch(33.5% 0.158 74.47);
+    --color-primary-950: oklch(25.5% 0.158 74.47);
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}

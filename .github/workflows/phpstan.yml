@@ -4,6 +4,15 @@ on:
   push:
     paths:
       - '**.php'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpstan.neon.dist'
+      - '.github/workflows/phpstan.yml'
+  pull_request:
+    paths:
+      - '**.php'
+      - 'composer.json'
+      - 'composer.lock'
       - 'phpstan.neon.dist'
       - '.github/workflows/phpstan.yml'
 
@@ -23,6 +32,9 @@ jobs:
 
       - name: Install composer dependencies
         uses: ramsey/composer-install@v4
+
+      - name: Run package discovery
+        run: php vendor/bin/testbench package:discover --ansi
 
       - name: Run PHPStan
         run: ./vendor/bin/phpstan --error-format=github
