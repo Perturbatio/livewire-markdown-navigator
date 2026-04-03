@@ -24,5 +24,8 @@ jobs:
       - name: Install composer dependencies
         uses: ramsey/composer-install@v4
 
+      - name: Run package discovery
+        run: php vendor/bin/testbench package:discover --ansi
+
       - name: Run PHPStan
         run: ./vendor/bin/phpstan --error-format=github
