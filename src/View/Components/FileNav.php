@@ -3,6 +3,7 @@
 namespace Perturbatio\LivewireMarkdownNavigator\View\Components;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\View as ViewFactory;
 use Illuminate\View\Component;
 
 class FileNav extends Component
@@ -15,6 +16,7 @@ class FileNav extends Component
 
     public function render(): View
     {
-        return view('livewire-markdown-navigator::components.file-nav');
+        // using a ViewFactory to work around larastan's view-string causing problems in github actions
+        return ViewFactory::make('livewire-markdown-navigator::components.file-nav');
     }
 }
