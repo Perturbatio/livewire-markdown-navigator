@@ -2,12 +2,12 @@
 
 PRs are welcome, but please open an issue first to discuss what you would like to change.
 
-## General Guidelines:
+## General Guidelines
 
 * No abuse, no harassment
 * No words that would get you in trouble in a job interview
 
-## Coding Guidelines:
+## Coding Guidelines
 
 * All new code must be covered by tests, and all existing tests must pass.
 * Mutation testing must be run and all mutants must be killed.
