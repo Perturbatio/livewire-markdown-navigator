@@ -14,6 +14,7 @@ new class extends Component {
     public string $docPath;
     public string $content = '';
     public int $cacheDuration;
+    public string $loadingClasses = 'loading opacity-75 transition-opacity pointer-events-none';
     #[Url]
     public ?string $markdownNavSelected = null;
     public string $diskName;
@@ -139,7 +140,7 @@ new class extends Component {
                 <div wire:loading>
                     <livewire:perturbatio::docs-loading-indicator class="loading-indicator"/>
                 </div>
-                <div class="content">
+                <div class="content opacity-100" wire:loading.class.remove="opacity-100" @if($loadingClasses)wire:loading.class="{{$loadingClasses}}" @endif>
                     {!! $content !!}
                 </div>
             </div>

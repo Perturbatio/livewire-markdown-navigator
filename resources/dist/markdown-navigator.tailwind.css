@@ -132,3 +132,6 @@
     }
 
 }
+
+@source inline('blur-{sm,[2px]}');
+@source inline('opacity-{25,50,75,100}');

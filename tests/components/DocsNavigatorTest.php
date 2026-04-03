@@ -6,6 +6,7 @@ use Perturbatio\LivewireMarkdownNavigator\Actions\RenderFileAction;
 use Perturbatio\LivewireMarkdownNavigator\CommonMark\Extension\DocLink\DocLinkExtension;
 use Perturbatio\LivewireMarkdownNavigator\CommonMark\Extension\DocLink\DocLinkRenderer;
 use Perturbatio\LivewireMarkdownNavigator\CommonMark\Extension\DocLink\DocLinkRewriter;
+use Perturbatio\LivewireMarkdownNavigator\View\Components\FileNav;
 
 beforeEach(function () {
     $this->defaultDiskName = 'docs';
@@ -20,6 +21,7 @@ covers([
     DocLinkRewriter::class,
     CacheRenderedFileAction::class,
     RenderFileAction::class,
+    FileNav::class,
 ]);
 
 it('renders successfully', function () {
@@ -36,7 +38,7 @@ MARKDOWN
         'docPath' => $this->defaultDocsPath,
     ])
         ->assertStatus(200)
-        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>'.false);
+        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 
 it('renders a test document', function () {
@@ -160,4 +162,39 @@ MARKDOWN
     expect(Cache::get($key))
         ->toContain('<h1 id="test-heading">test heading</h1>')
         ->toContain('<p>test content</p>');
+});
+
+it('has loading classes', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+    ])
+        ->assertStatus(200)
+        ->assertSeeHtml('wire:loading.class="loading opacity-75 transition-opacity pointer-events-none"');
+});
+
+it('loading classes can be overridden', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+        'loadingClasses' => 'loading with-this-class-instead',
+    ])
+        ->assertStatus(200)
+        ->assertSeeHtml('wire:loading.class="loading with-this-class-instead"');
 });

@@ -17,6 +17,7 @@ class FileNav extends Component
     public function render(): View
     {
         // using a ViewFactory to work around larastan's view-string causing problems in github actions
+        /* @see /resources/views/components/file-nav.blade.php */
         return ViewFactory::make('livewire-markdown-navigator::components.file-nav');
     }
 }
