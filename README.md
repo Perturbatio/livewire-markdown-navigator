@@ -74,6 +74,9 @@ return [
 
 For more information on the available CommonMark options, see the [league/commonmark documentation](https://commonmark.thephpleague.com/2.x/configuration/).
 
+## Livewire Component usage
+See [component documentation](resources/docs/markdown-navigator/README.md).
+
 ## Styles
 You can publish the assets (CSS) with:
 

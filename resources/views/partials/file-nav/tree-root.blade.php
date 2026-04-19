@@ -15,6 +15,10 @@
             // Filter out empty directories
             return $key !== ':path' && !(is_array($child) && count($child) === 0) ;
         }),
+        'collapseChildren'=> $isDirectory
+            && $collapseChildren
+            && $markdownNavSelected
+            && !Str::startsWith($markdownNavSelected, $docPath . '/' . $filePath),
         'docPath' => $docPath,
         'markdownNavSelected' => $markdownNavSelected,
     ])

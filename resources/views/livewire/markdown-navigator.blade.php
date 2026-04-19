@@ -19,6 +19,7 @@ new class extends Component {
     public ?string $markdownNavSelected = null;
     public string $diskName;
     public int $startingDepth = 1;
+    public bool $collapseChildren = false;
     protected array $config = [];
 
     public function mount(
@@ -135,6 +136,7 @@ new class extends Component {
                     :startingDepth="$startingDepth"
                     :markdownNavSelected="$markdownNavSelected"
                     class="file-nav"
+                    :collapse-children="$collapseChildren"
                 />
             </div>
             <div class="markdown-content">

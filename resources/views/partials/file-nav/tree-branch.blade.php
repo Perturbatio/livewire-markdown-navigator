@@ -1,7 +1,17 @@
-
-<div class="directory-container {{ $markdownNavSelected === $docPath . '/' . $entry ? 'selected' : '' }}">
-    <div class="directory-title">{{ \Str::of($entry)->before('.md')->replace('-', ' ')->title() }}</div>
-    <ul class="directory--children">
+<div class="directory-container {{ $markdownNavSelected === $docPath . '/' . $entry ? 'selected' : '' }}"
+x-data="{ open: {{ $collapseChildren ? 'false' : 'true' }} }"
+>
+    <div class="directory-title"
+         tabindex="0"
+         x-on:click="open = !open"
+         x-on:keyup.enter="open = !open"
+         :class="{
+             'is-open': open,
+             'is-collapsed': !open
+         }"
+         title="{{ $entry }}"
+    >{{ \Str::of($entry)->before('.md')->replace('-', ' ')->title() }}</div>
+    <ul class="directory-children" x-show="open" x-transition>
         @foreach($children as $childEntry => $grandChildren)
             @php
                 $filePath = collect($grandChildren)->get(':path', $childEntry); // Get the path for leaf nodes, default to entry name for directories
@@ -25,6 +35,10 @@
                     'children' => $filteredChildren,
                     'docPath' => $docPath,
                     'markdownNavSelected' => $markdownNavSelected,
+                    'collapseChildren'=> $isDirectory
+                        && $collapseChildren
+                        && $markdownNavSelected
+                        && !Str::startsWith($markdownNavSelected, $docPath . '/' . $filePath),
                 ])
             </li>
         @endforeach

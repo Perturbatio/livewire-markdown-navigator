@@ -55,7 +55,8 @@ MARKDOWN
         'docPath' => $this->defaultDocsPath,
     ])
         ->assertStatus(200)
-        ->assertDontSeeHtml('<div class="directory-title">Test Docs</div>')
+        ->assertDontSeeHtml('title="test-docs"')
+        ->assertDontSeeHtml('>Test Docs</div>')
         ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 
@@ -74,7 +75,8 @@ MARKDOWN
         'startingDepth' => 0,
     ])
         ->assertStatus(200)
-        ->assertSeeHtml('<div class="directory-title">Test Docs</div>')
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
         ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 
@@ -93,11 +95,12 @@ MARKDOWN
         'startingDepth' => -10,
     ])
         ->assertStatus(200)
-        ->assertSeeHtml('<div class="directory-title">Test Docs</div>')
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
         ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 
-it('sorts the doc paths as a title when starting depth is 0', function () {
+it('shows the doc paths as a title when starting depth is 0', function () {
     $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
 # Index Page
 
@@ -112,7 +115,8 @@ MARKDOWN
         'startingDepth' => 0,
     ])
         ->assertStatus(200)
-        ->assertSeeHtml('<div class="directory-title">Test Docs</div>')
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
         ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 

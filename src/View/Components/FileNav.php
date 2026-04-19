@@ -19,6 +19,7 @@ class FileNav extends Component
         public string $docPath,
         public ?string $markdownNavSelected,
         public int $startingDepth,
+        public bool $collapseChildren = false,
     ) {
         $this->setFileTree($markdownNavigator->files ?? []);
         $this->startingDepth = max(0, $this->startingDepth);
