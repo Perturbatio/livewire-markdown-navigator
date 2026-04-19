@@ -99,7 +99,7 @@
 
     /** File nav component*/
     .file-nav {
-        @apply p-4 overflow-y-auto fixed bg-gray-200 dark:bg-gray-900 lg:relative;
+        @apply p-4 overflow-y-auto fixed bg-gray-200 dark:bg-gray-900 lg:relative max-h-full;
         .file {
             @apply py-1;
             &.selected-file {
@@ -123,10 +123,16 @@
             }
         }
         .directory {
-            @apply italic font-bold relative py-4 mb-4;
-            &:after {
-                @apply border-b-2 border-gray-600 dark:border-gray-200 h-2 m-auto absolute left-0 bottom-0 right-0;
-                content: ' ';
+            .directory-title {
+                @apply italic font-bold relative py-4 mb-4;
+
+                &:after {
+                    @apply border-b-2 border-gray-600 dark:border-gray-200 h-2 m-auto absolute left-0 bottom-0 right-0;
+                    content: ' ';
+                }
+            }
+            .directory {
+                @apply pl-4;
             }
         }
     }

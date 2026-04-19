@@ -18,6 +18,7 @@ new class extends Component {
     #[Url]
     public ?string $markdownNavSelected = null;
     public string $diskName;
+    public int $startingDepth = 1;
     protected array $config = [];
 
     public function mount(
@@ -26,7 +27,7 @@ new class extends Component {
         int $cacheDuration = 60 * 24, // cache for 24 hours by default
         null|string $defaultFile = null,
     ): void {
-
+        $this->startingDepth = max(0, $this->startingDepth);
         $this->config = config('livewire-markdown-navigator');
         $this->docPath = $docPath;
 
@@ -131,6 +132,7 @@ new class extends Component {
                 <x-livewire-markdown-navigator::file-nav
                     :markdownNavigator="$this"
                     :docPath="$docPath"
+                    :startingDepth="$startingDepth"
                     :markdownNavSelected="$markdownNavSelected"
                     class="file-nav"
                 />
