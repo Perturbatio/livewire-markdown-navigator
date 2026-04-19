@@ -41,6 +41,85 @@ MARKDOWN
         ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
 });
 
+it('defaults to 1 for starting depth', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+    ])
+        ->assertStatus(200)
+        ->assertDontSeeHtml('title="test-docs"')
+        ->assertDontSeeHtml('>Test Docs</div>')
+        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
+});
+
+it('renders the docs path as a title when starting depth is 0', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+        'startingDepth' => 0,
+    ])
+        ->assertStatus(200)
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
+        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
+});
+
+it('does not allow a starting depth below 0', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+        'startingDepth' => -10,
+    ])
+        ->assertStatus(200)
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
+        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
+});
+
+it('shows the doc paths as a title when starting depth is 0', function () {
+    $this->disk->put("{$this->defaultDocsPath}/index.md", <<<'MARKDOWN'
+# Index Page
+
+[Test Docs Here](./test-docs.md)
+
+MARKDOWN
+    );
+
+    Livewire::test('perturbatio::markdown-navigator', [
+        'diskName' => $this->defaultDiskName,
+        'docPath' => $this->defaultDocsPath,
+        'startingDepth' => 0,
+    ])
+        ->assertStatus(200)
+        ->assertSeeHtml('title="test-docs"')
+        ->assertSeeHtml('>Test Docs</div>')
+        ->assertSeeHtml('<h1 id="index-page">Index Page</h1>');
+});
+
 it('renders a test document', function () {
     $this->disk->put('test-docs/index.md', <<<'MARKDOWN'
 # Index Page
